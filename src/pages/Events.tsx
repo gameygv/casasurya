@@ -5,7 +5,16 @@ import RecurringEventModal from '../components/RecurringEventModal';
 
 export default function Events() {
   const { language } = useLanguage();
-  const [selectedEvent, setSelectedEvent] = useState<any>(null);
+  const [selectedEvent, setSelectedEvent] = useState<{
+    title: string;
+    schedule: string;
+    shortDescription: string;
+    fullDescription: string;
+    image: string;
+    video?: string;
+    whatsappMessage?: string;
+    registrationUrl?: string;
+  } | null>(null);
 
   const heroGalleryImages = [
     '/media/g79.jpeg',
