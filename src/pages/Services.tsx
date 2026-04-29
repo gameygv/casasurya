@@ -43,6 +43,7 @@ export default function Services() {
     'Reflexologia',
     'Curación de Susto y Espanto',
     'Limpia Energética',
+    'Sanación con Raíces (Limpia + Biofeedback) - $150',
     'Hablar con Xochitl García',
   ];
 
