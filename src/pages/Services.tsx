@@ -1,9 +1,11 @@
+import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import Toast from '../components/Toast';
 import PodcastStyleHero from '../components/PodcastStyleHero';
-import { Star, Sun, Send } from 'lucide-react';
+import { Star, Sun, Send, Sparkles, ArrowRight } from 'lucide-react';
 import { useState } from 'react';
 import emailjs from '@emailjs/browser';
+import { services } from '../data/services';
 
 export default function Services() {
   const { language } = useLanguage();
@@ -23,12 +25,6 @@ export default function Services() {
     '/media/g46.jpeg',
     '/media/g73.jpeg',
      '/media/g86.jpeg',
-  ];
-
-  const serviceImages = [
-    { src: '/media/reiki.jpeg', alt: 'Reiki', position: 'object-cover' },
-    { src: '/media/masaje.jpeg', alt: 'Masaje', position: 'object-cover' },
-    { src: '/media/limpias.jpeg', alt: 'Limpias Energéticas', position: 'object-cover' },
   ];
 
   const serviceOptions = [
@@ -111,12 +107,72 @@ export default function Services() {
         galleryImages={heroGalleryImages}
       />
 
+      {/* Sección destacada: Sanación con Raíces */}
+      <section className="py-16 bg-gradient-to-br from-amber-50 via-white to-stone-50 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-amber-200/20 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-stone-200/20 rounded-full blur-3xl -translate-x-1/2 translate-y-1/2" />
+
+        <div className="container mx-auto px-4 relative">
+          <div className="text-center mb-10">
+            <div className="inline-flex items-center gap-2 bg-amber-100 text-amber-700 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+              <Sparkles size={16} />
+              {language === 'es' ? 'Destacado' : 'Featured'}
+              <Sparkles size={16} />
+            </div>
+          </div>
+
+          <div className="max-w-5xl mx-auto">
+            <Link to="/servicios/sanacion-con-raices" className="block group">
+              <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border-2 border-amber-200 hover:border-amber-400 transition-all duration-500 hover:shadow-amber-100/50">
+                <div className="grid grid-cols-1 lg:grid-cols-2">
+                  <div className="relative">
+                    <img
+                      src="/media/SanacionConRaices.jpeg"
+                      alt={language === 'es' ? 'Sanación con Raíces' : 'Healing with Roots'}
+                      className="w-full h-full object-cover min-h-[400px]"
+                    />
+                    <div className="absolute top-4 left-4 bg-amber-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
+                      $150
+                    </div>
+                  </div>
+                  <div className="p-8 lg:p-12 flex flex-col justify-center">
+                    <h2 className="text-3xl lg:text-4xl font-serif font-bold text-stone-900 mb-4 group-hover:text-amber-700 transition-colors">
+                      {language === 'es' ? 'Sanación con Raíces, Tecnología con Corazón' : 'Healing with Roots, Technology with Heart'}
+                    </h2>
+                    <p className="text-lg text-stone-600 leading-relaxed mb-6">
+                      {language === 'es'
+                        ? 'Paquete de terapia integral que combina lo mejor de dos mundos: Limpia Energética (medicina ancestral) + Terapia de Biofeedback (medicina cuántica). Libera, equilibra, reconéctate y sana desde la raíz.'
+                        : 'Comprehensive therapy package combining the best of two worlds: Energy Cleansing (ancestral medicine) + Biofeedback Therapy (quantum medicine). Release, balance, reconnect and heal from the root.'}
+                    </p>
+                    <div className="grid grid-cols-2 gap-3 mb-8">
+                      {(language === 'es'
+                        ? ['Limpia Energética', 'Terapia de Biofeedback', 'Medicina Ancestral', 'Medicina Cuántica']
+                        : ['Energy Cleansing', 'Biofeedback Therapy', 'Ancestral Medicine', 'Quantum Medicine']
+                      ).map((tag, i) => (
+                        <span key={i} className="text-sm bg-stone-100 text-stone-700 px-3 py-1.5 rounded-full text-center">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    <div className="inline-flex items-center gap-2 text-amber-600 font-semibold group-hover:gap-4 transition-all">
+                      {language === 'es' ? 'Ver más y reservar' : 'Learn more & book'}
+                      <ArrowRight size={20} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Grid de todos los servicios */}
       <section className="py-24 bg-gradient-to-b from-white to-stone-50 relative overflow-hidden">
         <div className="absolute top-0 left-0 w-96 h-96 bg-amber-100/30 rounded-full blur-3xl -translate-x-1/2" />
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-stone-200/30 rounded-full blur-3xl translate-x-1/2" />
 
         <div className="container mx-auto px-4 relative">
-          <div className="max-w-4xl mx-auto text-center mb-20">
+          <div className="max-w-4xl mx-auto text-center mb-16">
             <div className="flex items-center justify-center gap-3 mb-6">
               <Star className="text-amber-600" size={24} />
               <span className="text-amber-600 font-medium tracking-wider uppercase text-sm">
@@ -131,18 +187,33 @@ export default function Services() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-            {serviceImages.map((image, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-3xl shadow-xl overflow-hidden border border-stone-100 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mb-20">
+            {services.filter(s => s.slug !== 'sanacion-con-raices').map((service) => (
+              <Link
+                key={service.slug}
+                to={`/servicios/${service.slug}`}
+                className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-stone-100"
               >
-                <img
-                  src={image.src}
-                  alt={image.alt}
-                  className={`w-full h-full ${image.position}`}
-                />
-              </div>
+                <div className="h-56 overflow-hidden">
+                  <img
+                    src={service.heroImage}
+                    alt={language === 'es' ? service.name : service.nameEN}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-serif font-bold text-stone-900 mb-3 group-hover:text-amber-700 transition-colors">
+                    {language === 'es' ? service.name : service.nameEN}
+                  </h3>
+                  <p className="text-stone-600 text-sm leading-relaxed mb-4 line-clamp-3">
+                    {language === 'es' ? service.shortDescription : service.shortDescriptionEN}
+                  </p>
+                  <span className="inline-flex items-center gap-1 text-amber-600 font-medium text-sm group-hover:gap-2 transition-all">
+                    {language === 'es' ? 'Conoce más' : 'Learn more'}
+                    <ArrowRight size={16} />
+                  </span>
+                </div>
+              </Link>
             ))}
           </div>
 
