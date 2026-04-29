@@ -5,7 +5,6 @@ import PodcastStyleHero from '../components/PodcastStyleHero';
 import { Star, Sun, Send, Sparkles, ArrowRight } from 'lucide-react';
 import { useState } from 'react';
 import emailjs from '@emailjs/browser';
-import { services } from '../data/services';
 
 export default function Services() {
   const { language } = useLanguage();
@@ -25,6 +24,12 @@ export default function Services() {
     '/media/g46.jpeg',
     '/media/g73.jpeg',
      '/media/g86.jpeg',
+  ];
+
+  const serviceImages = [
+    { src: '/media/reiki.jpeg', alt: 'Reiki', position: 'object-cover' },
+    { src: '/media/masaje.jpeg', alt: 'Masaje', position: 'object-cover' },
+    { src: '/media/limpias.jpeg', alt: 'Limpias Energéticas', position: 'object-cover' },
   ];
 
   const serviceOptions = [
@@ -166,13 +171,13 @@ export default function Services() {
         </div>
       </section>
 
-      {/* Grid de todos los servicios */}
+      {/* Tarjetas de servicios originales */}
       <section className="py-24 bg-gradient-to-b from-white to-stone-50 relative overflow-hidden">
         <div className="absolute top-0 left-0 w-96 h-96 bg-amber-100/30 rounded-full blur-3xl -translate-x-1/2" />
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-stone-200/30 rounded-full blur-3xl translate-x-1/2" />
 
         <div className="container mx-auto px-4 relative">
-          <div className="max-w-4xl mx-auto text-center mb-16">
+          <div className="max-w-4xl mx-auto text-center mb-20">
             <div className="flex items-center justify-center gap-3 mb-6">
               <Star className="text-amber-600" size={24} />
               <span className="text-amber-600 font-medium tracking-wider uppercase text-sm">
@@ -187,33 +192,18 @@ export default function Services() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mb-20">
-            {services.filter(s => s.slug !== 'sanacion-con-raices').map((service) => (
-              <Link
-                key={service.slug}
-                to={`/servicios/${service.slug}`}
-                className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-stone-100"
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+            {serviceImages.map((image, index) => (
+              <div
+                key={index}
+                className="bg-white rounded-3xl shadow-xl overflow-hidden border border-stone-100 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
               >
-                <div className="h-56 overflow-hidden">
-                  <img
-                    src={service.heroImage}
-                    alt={language === 'es' ? service.name : service.nameEN}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-serif font-bold text-stone-900 mb-3 group-hover:text-amber-700 transition-colors">
-                    {language === 'es' ? service.name : service.nameEN}
-                  </h3>
-                  <p className="text-stone-600 text-sm leading-relaxed mb-4 line-clamp-3">
-                    {language === 'es' ? service.shortDescription : service.shortDescriptionEN}
-                  </p>
-                  <span className="inline-flex items-center gap-1 text-amber-600 font-medium text-sm group-hover:gap-2 transition-all">
-                    {language === 'es' ? 'Conoce más' : 'Learn more'}
-                    <ArrowRight size={16} />
-                  </span>
-                </div>
-              </Link>
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  className={`w-full h-full ${image.position}`}
+                />
+              </div>
             ))}
           </div>
 
