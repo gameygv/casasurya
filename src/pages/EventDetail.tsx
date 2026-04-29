@@ -78,11 +78,11 @@ export default function EventDetail() {
 
       <section className="py-8 bg-stone-100">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-3xl mx-auto flex justify-center">
             <img
               src={event.image}
               alt={language === 'es' ? event.title : event.titleEN}
-              className="w-full h-auto rounded-2xl shadow-xl"
+              className="max-w-full max-h-[70vh] w-auto h-auto object-contain rounded-2xl shadow-xl"
             />
           </div>
         </div>

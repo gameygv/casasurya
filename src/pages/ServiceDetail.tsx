@@ -41,11 +41,11 @@ export default function ServiceDetail() {
     <div>
       <section className="pt-24 pb-8 bg-gradient-to-b from-stone-100 to-white">
         <div className="container mx-auto px-4">
-          <div className="max-w-5xl mx-auto flex justify-center">
+          <div className="max-w-3xl mx-auto flex justify-center">
             <img
               src={service.heroImage}
               alt={language === 'es' ? service.name : service.nameEN}
-              className="max-w-full h-auto rounded-2xl shadow-xl"
+              className="max-w-full max-h-[70vh] w-auto h-auto object-contain rounded-2xl shadow-xl"
             />
           </div>
           <div className="max-w-4xl mx-auto">

@@ -51,33 +51,33 @@ export default function RecurringEventModal({ isOpen, onClose, event }: Recurrin
             <X className="text-stone-700" size={24} />
           </button>
 
-          <div className="p-8 md:p-12">
-            <div className="mb-8">
+          <div className="p-6 md:p-10">
+            <div className="mb-6 flex justify-center">
               <img
                 src={event.image}
                 alt={event.title}
-                className="w-full h-auto rounded-2xl shadow-lg"
+                className="max-w-full max-h-[50vh] w-auto h-auto object-contain rounded-2xl shadow-lg"
               />
             </div>
 
-            <h2 className="text-4xl font-serif font-bold text-stone-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-serif font-bold text-stone-900 mb-4">
               {event.title}
             </h2>
 
-            <p className="text-xl text-amber-600 font-semibold mb-6">
+            <p className="text-lg text-amber-600 font-semibold mb-6">
               {event.schedule}
             </p>
 
-            <p className="text-lg text-stone-700 leading-relaxed mb-8">
+            <p className="text-base md:text-lg text-stone-700 leading-relaxed mb-8 whitespace-pre-line">
               {event.fullDescription}
             </p>
 
             {event.programImage && (
-              <div className="mb-8">
+              <div className="mb-8 flex justify-center">
                 <img
                   src={event.programImage}
                   alt={`${event.title} - Programa`}
-                  className="w-full h-auto rounded-2xl shadow-lg"
+                  className="max-w-full max-h-[70vh] w-auto h-auto object-contain rounded-2xl shadow-lg"
                 />
               </div>
             )}
