@@ -12,6 +12,7 @@ export default function Events() {
     fullDescription: string;
     image: string;
     video?: string;
+    programImage?: string;
     whatsappMessage?: string;
     registrationUrl?: string;
   } | null>(null);
@@ -30,18 +31,19 @@ export default function Events() {
       id: 'temazcal-10-aniversario',
       title: language === 'es' ? '10º Aniversario del Temazcal' : '10th Temazcal Anniversary',
       schedule: language === 'es'
-        ? 'Domingo 17 de Mayo, 2026 - Desde las 12pm'
-        : 'Sunday May 17, 2026 - From 12pm',
+        ? 'Viernes 15 y Domingo 17 de Mayo, 2026'
+        : 'Friday May 15 & Sunday May 17, 2026',
       shortDescription: language === 'es'
-        ? 'Save the date! Celebramos 10 años de mantener viva la sagrada tradición del temazcal en nuestra comunidad con una ceremonia especial.'
-        : 'Save the date! We celebrate 10 years of keeping the sacred temazcal tradition alive in our community with a special ceremony.',
+        ? 'Celebramos 10 años de fuego, medicina y comunidad. Dos días de ceremonia ancestral, cacao, canto, música prehispánica, danza azteca, comida y temazcal.'
+        : 'We celebrate 10 years of fire, medicine and community. Two days of ancestral ceremony, cacao, song, pre-Hispanic music, Aztec dance, food and temazcal.',
       fullDescription: language === 'es'
-        ? 'Únete a nosotros el domingo 17 de mayo de 2026 para celebrar una década completa de ceremonias de temazcal en Casa Surya. Este evento especial honra 10 años de purificación, sanación y conexión con nuestras raíces ancestrales. Una ceremonia única para agradecer a todos quienes han sido parte de este camino sagrado y para renovar nuestro compromiso con esta medicina ancestral que ha transformado tantas vidas. Un día de celebración comunitaria, gratitud y conexión profunda.'
-        : 'Join us on Sunday May 17, 2026 to celebrate a full decade of temazcal ceremonies at Casa Surya. This special event honors 10 years of purification, healing and connection with our ancestral roots. A unique ceremony to thank all those who have been part of this sacred journey and to renew our commitment to this ancestral medicine that has transformed so many lives. A day of community celebration, gratitude and deep connection.',
+        ? '10º Aniversario del Temazcal — Diez años de fuego, diez años de renacer.\n\n📅 DÍA 1 — CEREMONIA ANCESTRAL\nViernes 15 de Mayo (horario por confirmar)\nTe invitamos a ser parte de un encuentro especial donde el tiempo se detiene y el corazón recuerda. La medicina de la tierra se hace presente de forma amorosa y respetuosa, guiándonos suavemente hacia el equilibrio, la introspección y el bienestar. Ven a vivir una experiencia íntima, profunda y llena de belleza, en un ambiente seguro, cuidado y lleno de respeto. La tierra nos llama… y juntos respondemos.\n\n📅 DÍA 2 — CELEBRACIÓN DEL ANIVERSARIO\nDomingo 17 de Mayo\n\n🍫 11:00 - 12:00 — Ceremonia de Cacao y Canto con Paolibri\nEspacio sagrado para abrir el corazón y conectar con la dulzura de la vida. El cacao, medicina ancestral de la tierra, nos guía suavemente hacia la introspección, la conexión y la presencia.\n\n🎶 12:00 - 3:00 — Música, Danza y Comida\nUn momento para disfrutar, agradecer y celebrar juntos. Viviremos una bella celebración con música prehispánica y danza azteca, honrando nuestras raíces y la alegría de estar juntos. Compartiremos alimento y pastel en comunidad, celebrando la vida y el aniversario de nuestro temazcal.\n\n🔥 3:00 - 5:00 — Temazcal\nEncenderemos el fuego del temazcal para celebrar 10 años de camino, medicina y comunidad. Con gratitud, sudaremos juntos, guiados por el corazón y la memoria de nuestros ancestros.'
+        : '10th Temazcal Anniversary — Ten years of fire, ten years of rebirth.\n\n📅 DAY 1 — ANCESTRAL CEREMONY\nFriday May 15 (time TBA)\nWe invite you to be part of a special gathering where time stands still and the heart remembers. The medicine of the earth becomes present in a loving and respectful way, gently guiding us toward balance, introspection and wellbeing. Come live an intimate, deep and beautiful experience, in a safe, caring and respectful environment. The earth calls us… and together we answer.\n\n📅 DAY 2 — ANNIVERSARY CELEBRATION\nSunday May 17\n\n🍫 11:00 AM - 12:00 PM — Cacao & Song Ceremony with Paolibri\nA sacred space to open the heart and connect with the sweetness of life. Cacao, ancestral medicine of the earth, gently guides us toward introspection, connection and presence.\n\n🎶 12:00 - 3:00 PM — Music, Dance & Food\nA moment to enjoy, give thanks and celebrate together. We will experience a beautiful celebration with pre-Hispanic music and Aztec dance, honoring our roots and the joy of being together. We will share food and cake as a community, celebrating life and the anniversary of our temazcal.\n\n🔥 3:00 - 5:00 PM — Temazcal\nWe will light the temazcal fire to celebrate 10 years of path, medicine and community. With gratitude, we will sweat together, guided by the heart and the memory of our ancestors.',
       image: '/media/Temazcal10.jpeg',
+      programImage: '/media/Evento10thAniversario.jpeg',
       whatsappMessage: language === 'es'
-        ? 'Hola, me interesa participar en el 10º Aniversario del Temazcal el 17 de Mayo. ¿Podrían darme más información?'
-        : 'Hello, I\'m interested in participating in the 10th Temazcal Anniversary on May 17. Could you give me more information?'
+        ? 'Hola, me interesa participar en el 10º Aniversario del Temazcal (15 y 17 de Mayo). ¿Podrían darme más información?'
+        : 'Hello, I\'m interested in participating in the 10th Temazcal Anniversary (May 15 & 17). Could you give me more information?'
     },
     {
       id: 'taller-limpias-energeticas',

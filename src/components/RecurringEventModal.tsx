@@ -11,6 +11,7 @@ interface RecurringEventModalProps {
     fullDescription: string;
     image: string;
     video?: string;
+    programImage?: string;
     whatsappMessage?: string;
     registrationUrl?: string;
   };
@@ -70,6 +71,16 @@ export default function RecurringEventModal({ isOpen, onClose, event }: Recurrin
             <p className="text-lg text-stone-700 leading-relaxed mb-8">
               {event.fullDescription}
             </p>
+
+            {event.programImage && (
+              <div className="mb-8">
+                <img
+                  src={event.programImage}
+                  alt={`${event.title} - Programa`}
+                  className="w-full h-auto rounded-2xl shadow-lg"
+                />
+              </div>
+            )}
 
             {event.video && (
               <div className="mb-8">
