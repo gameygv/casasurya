@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import { X } from 'lucide-react';
 import PodcastStyleHero from '../components/PodcastStyleHero';
 import RecurringEventModal from '../components/RecurringEventModal';
 
@@ -11,11 +12,22 @@ export default function Events() {
     shortDescription: string;
     fullDescription: string;
     image: string;
+    images?: string[];
     video?: string;
     programImage?: string;
     whatsappMessage?: string;
     registrationUrl?: string;
   } | null>(null);
+  const [lightboxImage, setLightboxImage] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (lightboxImage) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [lightboxImage]);
 
   const heroGalleryImages = [
     '/media/g79.jpeg',
@@ -39,7 +51,8 @@ export default function Events() {
       fullDescription: language === 'es'
         ? '10º Aniversario del Temazcal — Diez años de fuego, diez años de renacer.\n\n📅 DÍA 1 — CEREMONIA ANCESTRAL\nViernes 15 de Mayo (horario por confirmar)\nTe invitamos a ser parte de un encuentro especial donde el tiempo se detiene y el corazón recuerda. La medicina de la tierra se hace presente de forma amorosa y respetuosa, guiándonos suavemente hacia el equilibrio, la introspección y el bienestar. Ven a vivir una experiencia íntima, profunda y llena de belleza, en un ambiente seguro, cuidado y lleno de respeto. La tierra nos llama… y juntos respondemos.\n\n📅 DÍA 2 — CELEBRACIÓN DEL ANIVERSARIO\nDomingo 17 de Mayo\n\n🍫 11:00 - 12:00 — Ceremonia de Cacao y Canto con Paolibri\nEspacio sagrado para abrir el corazón y conectar con la dulzura de la vida. El cacao, medicina ancestral de la tierra, nos guía suavemente hacia la introspección, la conexión y la presencia.\n\n🎶 12:00 - 3:00 — Música, Danza y Comida\nUn momento para disfrutar, agradecer y celebrar juntos. Viviremos una bella celebración con música prehispánica y danza azteca, honrando nuestras raíces y la alegría de estar juntos. Compartiremos alimento y pastel en comunidad, celebrando la vida y el aniversario de nuestro temazcal.\n\n🔥 3:00 - 5:00 — Temazcal\nEncenderemos el fuego del temazcal para celebrar 10 años de camino, medicina y comunidad. Con gratitud, sudaremos juntos, guiados por el corazón y la memoria de nuestros ancestros.'
         : '10th Temazcal Anniversary — Ten years of fire, ten years of rebirth.\n\n📅 DAY 1 — ANCESTRAL CEREMONY\nFriday May 15 (time TBA)\nWe invite you to be part of a special gathering where time stands still and the heart remembers. The medicine of the earth becomes present in a loving and respectful way, gently guiding us toward balance, introspection and wellbeing. Come live an intimate, deep and beautiful experience, in a safe, caring and respectful environment. The earth calls us… and together we answer.\n\n📅 DAY 2 — ANNIVERSARY CELEBRATION\nSunday May 17\n\n🍫 11:00 AM - 12:00 PM — Cacao & Song Ceremony with Paolibri\nA sacred space to open the heart and connect with the sweetness of life. Cacao, ancestral medicine of the earth, gently guides us toward introspection, connection and presence.\n\n🎶 12:00 - 3:00 PM — Music, Dance & Food\nA moment to enjoy, give thanks and celebrate together. We will experience a beautiful celebration with pre-Hispanic music and Aztec dance, honoring our roots and the joy of being together. We will share food and cake as a community, celebrating life and the anniversary of our temazcal.\n\n🔥 3:00 - 5:00 PM — Temazcal\nWe will light the temazcal fire to celebrate 10 years of path, medicine and community. With gratitude, we will sweat together, guided by the heart and the memory of our ancestors.',
-      image: '/media/Temazcal10.jpeg',
+      image: '/media/Temazcal10_01.jpeg',
+      images: ['/media/Temazcal10_01.jpeg', '/media/Temazcal10_02.jpeg'],
       programImage: '/media/Evento10thAniversario.jpeg',
       whatsappMessage: language === 'es'
         ? 'Hola, me interesa participar en el 10º Aniversario del Temazcal (15 y 17 de Mayo). ¿Podrían darme más información?'
@@ -117,24 +130,6 @@ export default function Events() {
 
   const recurringEvents = [
     {
-      id: 'circulo-canto',
-      title: language === 'es' ? 'Círculo de Canto' : 'Singing Circle',
-      schedule: language === 'es'
-        ? 'Gratuito y abierto a la comunidad, 2° & 4° jueves del mes'
-        : 'Free and open to the community, 2nd & 4th Thursday of the month',
-      shortDescription: language === 'es'
-        ? 'Espacios comunitarios de sanación colectiva donde la voz, el canto, el ritmo y la palabra se convierten en medicina.'
-        : 'Community spaces for collective healing where voice, song, rhythm and words become medicine.',
-      fullDescription: language === 'es'
-        ? 'Los círculos de canto y palabra de Casa Surya son espacios comunitarios de sanación colectiva donde la voz, el canto, el ritmo y la palabra se convierten en medicina. Estos círculos están abiertos a toda la comunidad y no requieren experiencia previa: todas las voces son bienvenidas.'
-        : 'Casa Surya\'s singing and word circles are community spaces for collective healing where voice, song, rhythm and words become medicine. These circles are open to the entire community and require no previous experience: all voices are welcome.',
-      image: '/media/CirculoCanto.jpeg',
-      video: '/media/circulo-canto.mp4',
-      whatsappMessage: language === 'es'
-        ? 'Hola, me interesa participar en el Círculo de Canto. ¿Podrían darme más información?'
-        : 'Hello, I\'m interested in participating in the Singing Circle. Could you give me more information?'
-    },
-    {
       id: 'circulo-sanacion',
       title: language === 'es' ? 'Círculo de Sanación' : 'Healing Circle',
       schedule: language === 'es'
@@ -172,6 +167,27 @@ export default function Events() {
     }
   ];
 
+  function RotatingImage({ images, alt, className, onClick }: { images: string[]; alt: string; className?: string; onClick?: (src: string) => void }) {
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    useEffect(() => {
+      if (images.length <= 1) return;
+      const interval = setInterval(() => {
+        setCurrentIndex((prev) => (prev + 1) % images.length);
+      }, 3000);
+      return () => clearInterval(interval);
+    }, [images.length]);
+
+    return (
+      <img
+        src={images[currentIndex]}
+        alt={alt}
+        className={`${className} cursor-pointer transition-opacity duration-500`}
+        onClick={() => onClick?.(images[currentIndex])}
+      />
+    );
+  }
+
   return (
     <div>
       <PodcastStyleHero
@@ -202,11 +218,21 @@ export default function Events() {
                 className="bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300"
               >
                 <div className="w-full h-80 bg-stone-100 flex items-center justify-center">
-                  <img
-                    src={event.image}
-                    alt={event.title}
-                    className="w-full h-full object-contain"
-                  />
+                  {event.images && event.images.length > 1 ? (
+                    <RotatingImage
+                      images={event.images}
+                      alt={event.title}
+                      className="w-full h-full object-contain"
+                      onClick={(src) => setLightboxImage(src)}
+                    />
+                  ) : (
+                    <img
+                      src={event.image}
+                      alt={event.title}
+                      className="w-full h-full object-contain cursor-pointer"
+                      onClick={() => setLightboxImage(event.image)}
+                    />
+                  )}
                 </div>
                 <div className="p-6">
                   <h3 className="text-2xl font-serif font-bold text-stone-900 mb-3">
@@ -244,7 +270,7 @@ export default function Events() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {recurringEvents.map((event) => (
               <div
                 key={event.id}
@@ -254,7 +280,8 @@ export default function Events() {
                   <img
                     src={event.image}
                     alt={event.title}
-                    className="w-full h-full object-contain"
+                    className="w-full h-full object-contain cursor-pointer"
+                    onClick={() => setLightboxImage(event.image)}
                   />
                 </div>
                 <div className="p-6">
@@ -285,6 +312,26 @@ export default function Events() {
         onClose={() => setSelectedEvent(null)}
         event={selectedEvent || recurringEvents[0]}
       />
+
+      {lightboxImage && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+          onClick={() => setLightboxImage(null)}
+        >
+          <button
+            onClick={() => setLightboxImage(null)}
+            className="absolute top-4 right-4 bg-white/90 hover:bg-white rounded-full p-2 shadow-lg transition-all hover:scale-110 z-10"
+          >
+            <X className="text-stone-700" size={24} />
+          </button>
+          <img
+            src={lightboxImage}
+            alt=""
+            className="max-w-full max-h-[90vh] object-contain rounded-2xl shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
     </div>
   );
 }
